@@ -75,6 +75,7 @@ main() {
     yes_no=n
     read -p "Install kernelv4? (y/n) (default: n)" yes_no
     [ $yes_no == 'y' ] && echo -e "Installing kernelv4" && install_kernel4.12
+    disable_root_ssh
     for i in {5..1} ; do echo "Your server will restart in $i seconds, Ctrl+C to disrupt it if you need"; sleep $i ; done
     init 6
 }
