@@ -36,7 +36,7 @@ error_detect_depends() {
 install_dependencies() {
     yum_depends=(
     epel-release
-    openssl openssl-devel gettext gcc autoconf libtool automake make asciidoc xmlto udns-devel libev-devel pcre pcre-devel links elinks git net-tools gnutls-devel libev-devel tcp_wrappers-devel pam-devel lz4-devel libseccomp-devel readline-devel libnl3-devel krb5-devel liboath-devel radcli-devel protobuf-c-devel libtalloc-devel pcllib-devel autogen-libopts-devel autogen protobuf-c gperf lockfile-progs nuttcp lcov uid_wrapper pam_wrapper nss_wrapper socket_wrapper gssntlmssp pam_oath screen
+    openssl openssl-devel gettext gcc autoconf libtool automake make asciidoc xmlto udns-devel libev-devel pcre pcre-devel links elinks git net-tools gnutls-devel libev-devel tcp_wrappers-devel pam-devel lz4-devel libseccomp-devel readline-devel libnl3-devel krb5-devel liboath-devel radcli-devel protobuf-c-devel libtalloc-devel pcllib-devel autogen-libopts-devel autogen protobuf-c gperf lockfile-progs nuttcp lcov uid_wrapper pam_wrapper nss_wrapper socket_wrapper gssntlmssp pam_oath screen vim
     )
     for depend in ${yum_depends[@]}; do
         error_detect_depends "yum -y install ${depend}"
@@ -52,9 +52,11 @@ install_kernel4.12() {
 add_new_user() {
     useradd rick
     mkdir /home/rick/.ssh
-    echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDJ9tmhZ6kMXUJXYpQbd6tTJkxgNJq3enMpgOAU7oyGRmkb2G8kI4/anevhjicsH1QHWJlreIUILokMtuUTmQzpQiL+/F7NfR9SMPge6KQEWHzXjoL28qux76PEMc+euVowRcPpw9ZYs4XMvV0BJb/CATHostR3souHmDfpiZGjSRBPq4gHTbnKJa/kFlLiuGZivebAL+Oaxzb+qWcXMdJbL5smx5YHGO1Ys8H44lDII/4CWSmTb+mKkA8Vr23EkfDEW273oJfPBjmpu40U90Oc5oId4Hy4OamMy/UY4ETY4CYl5MirTc3Ohbg5mbvI26m5NKc4wU4GUV2l7VWwU9Dv xhxu@xhxu-mac">> /home/rick/.ssh/authorized_keys
-    chmod 700 /home/rick/.ssh
+    echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCj3sFcfqI0ybPHSsdyFbV7+yKmWr562meCPqbisIUGy8qYDkrtjZ6e+uREAyww824HLTMhAp6qMzqekUqVelgUgtTJa/PH59ggsXVDuF3/h8pYvNMCtOo+RCHFcXLmvXUKmuUJ1xJx6qaFDH5IGA3uJakoyXQgZNCU3o6aXCKuZ3E8zATrmOJ7MMd5pyJRYSfwd3VdCL3p4MTf4zWXcJZc00i+SC34ME04qG8owqIoJ//UkMJZs7eHamV3gi+TwqU0pWH4kTNVrljncANcSnWKbsAcIkHPy4BfglzQJGJZQSeENQU5xD+MgPvxSBARhLvUsNwlz5wBpGLCk6yd2R8H xhxu@xhxu-mac" >> /home/rick/.ssh/authorized_keys
+    chmod 755 /home/rick/.ssh
+    chown rick:rick /home/rick/.ssh
     chmod 600 /home/rick/.ssh/authorized_keys
+    chown rick:rick /home/rick/.ssh/authorized_keys
     echo "%rick     ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
 }
 
