@@ -36,7 +36,7 @@ error_detect_depends() {
 install_dependencies() {
     yum_depends=(
     epel-release
-    openssl openssl-devel gettext gcc autoconf libtool automake make asciidoc xmlto udns-devel libev-devel pcre pcre-devel links elinks git net-tools gnutls-devel libev-devel tcp_wrappers-devel pam-devel lz4-devel libseccomp-devel readline-devel libnl3-devel krb5-devel liboath-devel radcli-devel protobuf-c-devel libtalloc-devel http-parser-devel pcllib-devel autogen-libopts-devel autogen protobuf-c gperf lockfile-progs nuttcp lcov uid_wrapper pam_wrapper nss_wrapper socket_wrapper gssntlmssp pam_oath
+    openssl openssl-devel gettext gcc autoconf libtool automake make asciidoc xmlto udns-devel libev-devel pcre pcre-devel links elinks git net-tools gnutls-devel libev-devel tcp_wrappers-devel pam-devel lz4-devel libseccomp-devel readline-devel libnl3-devel krb5-devel liboath-devel radcli-devel protobuf-c-devel libtalloc-devel http-parser-devel pcllib-devel autogen-libopts-devel autogen protobuf-c gperf lockfile-progs nuttcp lcov uid_wrapper pam_wrapper nss_wrapper socket_wrapper gssntlmssp pam_oath screen
     )
     for depend in ${yum_depends[@]}; do
         error_detect_depends "yum -y install ${depend}"
@@ -49,14 +49,34 @@ install_kernel4.12() {
     yum --enablerepo=elrepo-kernel -y install kernel-ml kernel-ml-devel
 }
 
+add_new_user() {
+    useradd rick
+    mkdir /home/rick/.ssh
+    echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDJ9tmhZ6kMXUJXYpQbd6tTJkxgNJq3enMpgOAU7oyGRmkb2G8kI4/anevhjicsH1QHWJlreIUILokMtuUTmQzpQiL+/F7NfR9SMPge6KQEWHzXjoL28qux76PEMc+euVowRcPpw9ZYs4XMvV0BJb/CATHostR3souHmDfpiZGjSRBPq4gHTbnKJa/kFlLiuGZivebAL+Oaxzb+qWcXMdJbL5smx5YHGO1Ys8H44lDII/4CWSmTb+mKkA8Vr23EkfDEW273oJfPBjmpu40U90Oc5oId4Hy4OamMy/UY4ETY4CYl5MirTc3Ohbg5mbvI26m5NKc4wU4GUV2l7VWwU9Dv xhxu@xhxu-mac">> /home/rick/.ssh/authorized_keys
+    chmod 700 /home/rick/.ssh
+    chmod 600 /home/rick/.ssh/authorized_keys
+    echo "%rick     ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
+}
+
+disable_root_ssh() {
+    sed -i 's/^#PermitRootLogin\s*yes$/PermitRootLogin no/g' /etc/ssh/sshd_config
+    sed -i 's/^#PubkeyAuthentication\s*yes$/PubkeyAuthentication yes/g' /etc/ssh/sshd_config
+    yes_no=n
+    read -p "Add New User with ssh key file? (y/n) (Default User: rick)" yes_no
+    [ $yes_no == 'y' ] && echo -e "Adding New User." && add_new_user
+    systemctl restart sshd
+}
+
 main() {
     disable_selinux
     disable_firewall
     install_dependencies
+    yum -y update
     yes_no=n
     read -p "Install kernelv4? (y/n) (default: n)" yes_no
     [ $yes_no == 'y' ] && echo -e "Installing kernelv4" && install_kernel4.12
-    yum -y update
+    for i in {5..1} ; do echo "Your server will restart in $i seconds, Ctrl+C to disrupt it if you need"; sleep $i ; done
+    init 6
 }
 
 main
