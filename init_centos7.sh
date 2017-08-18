@@ -69,7 +69,15 @@ disable_root_ssh() {
     systemctl restart sshd
 }
 
+check_root() {
+    if [[ $EUID -ne 0 ]]; then
+        echo "Please run this scripts with root account." 1>&2
+        exit 1
+    if
+}
+
 main() {
+    check_root
     disable_selinux
     disable_firewall
     install_dependencies
