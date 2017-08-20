@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#!/usr/bin/env bash
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 
@@ -58,14 +59,20 @@ add_new_user() {
     chmod 600 /home/rick/.ssh/authorized_keys
     chown rick:rick /home/rick/.ssh/authorized_keys
     echo "%rick     ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
+    useradd mike
+    mkdir /home/mike/.ssh
+    echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDSSA4r8ud0zPHtt/LEPyrEqu7O6L9jkt9UoYLJf+FD0lS5d9dRuVUxkiw4rlW+kPTcd8FP5rFXkQbLOoT1ZlsefmAC5hS1H4k9bGkrOY//iK1b9QI2G01w0eqBY0MDMPnCG1batSkFxngoaEL/yoeUic5MXgxXWzIIupUmCUOxDkDCQSyBgTOYtGLuzE/Qi/PZlSotgnyPANdVWE29DtTc+HQSb8xiS87nk/CuNz0SNZvinQ9apRMbEBvpslQjae2F5oFsmWLD3Z5hU5ei3QaN7aj0kNV6DXBeg/9gNBh37l74STviV8z9tpaeRv2Z85lYpa+UcV6W+5huRRO/GKyz mikegropp@GG1.local" >> /home/mike/.ssh/authorized_keys
+    chmod 755 /home/mike/.ssh
+    chown mike:mike /home/mike/.ssh
+    chmod 600 /home/mike/.ssh/authorized_keys
+    chown mike:mike /home/mike/.ssh/authorized_keys
+    echo "%mike     ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
 }
 
 disable_root_ssh() {
     sed -i 's/^#PermitRootLogin\s*yes$/PermitRootLogin no/g' /etc/ssh/sshd_config
     sed -i 's/^#PubkeyAuthentication\s*yes$/PubkeyAuthentication yes/g' /etc/ssh/sshd_config
-    yes_no=n
-    read -p "Add New User with ssh key file? (y/n) (Default User: rick)" yes_no
-    [ $yes_no == 'y' ] && echo -e "Adding New User." && add_new_user
+    add_new_user
     systemctl restart sshd
 }
 
@@ -82,12 +89,8 @@ main() {
     disable_firewall
     install_dependencies
     yum -y update
-    yes_no=n
-    read -p "Install kernelv4? (y/n) (default: n)" yes_no
-    [ $yes_no == 'y' ] && echo -e "Installing kernelv4" && install_kernel4.12
     disable_root_ssh
-    for i in {5..1} ; do echo "Your server will restart in $i seconds, Ctrl+C to disrupt it if you need"; sleep $i ; done
-    init 6
+    echo "Installation have completed, please login your server with (ssh USERNAME@IPADDRESS)"
 }
 
 main
