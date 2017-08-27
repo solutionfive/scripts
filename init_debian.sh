@@ -22,14 +22,14 @@ error_detect_depends() {
     ${command}
     if [ $? != 0 ]; then
         echo -e "${red}Error:${plain} Failed to install ${red}${depend}${plain}"
-        echo "${red}Error, please confirm"
+        echo -e "${red}Error, please confirm"
         exit 1
     fi
 }
 
 install_dependencies() {
     apt_depends=(
-    build-essential iperf make gcc-4.9 g++-4.9 libgnutls28-dev libprotobuf-c0-dev libtalloc-dev libhttp-parser-dev libpcl1-dev libopts25-dev autogen protobuf-c-compiler gperf liblockfile-bin nuttcp lcov libuid-wrapper libnss-wrapper libsocket-wrapper gss-ntlmssp libpam-oath  libwrap0-dev libpam0g-dev liblz4-dev libseccomp-dev libreadline-dev libnl-route-3-dev libkrb5-dev liboath-dev libradcli-dev libunistring0 libpam-wrapper
+    build-essential iperf vim make gcc-4.9 g++-4.9 libgnutls28-dev libprotobuf-c0-dev libtalloc-dev libhttp-parser-dev libpcl1-dev libopts25-dev autogen protobuf-c-compiler gperf liblockfile-bin nuttcp lcov libuid-wrapper libpam-oath  libwrap0-dev libpam0g-dev liblz4-dev libseccomp-dev libreadline-dev libnl-route-3-dev libkrb5-dev liboath-dev libunistring0
     )
     apt-get update -y && apt-get upgrade -y
     for depend in ${apt_depends[@]}; do
