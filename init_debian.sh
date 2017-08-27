@@ -29,7 +29,7 @@ error_detect_depends() {
 
 install_dependencies() {
     apt_depends=(
-    build-essential iperf vim make gcc-4.9 g++-4.9 libgnutls28-dev libprotobuf-c0-dev libtalloc-dev libhttp-parser-dev libpcl1-dev libopts25-dev autogen protobuf-c-compiler gperf liblockfile-bin nuttcp lcov libuid-wrapper libpam-oath  libwrap0-dev libpam0g-dev liblz4-dev libseccomp-dev libreadline-dev libnl-route-3-dev libkrb5-dev liboath-dev libunistring0
+    build-essential iperf sudo vim make gcc-4.9 g++-4.9 libgnutls28-dev libprotobuf-c0-dev libtalloc-dev libhttp-parser-dev libpcl1-dev libopts25-dev autogen protobuf-c-compiler gperf liblockfile-bin nuttcp lcov libuid-wrapper libpam-oath  libwrap0-dev libpam0g-dev liblz4-dev libseccomp-dev libreadline-dev libnl-route-3-dev libkrb5-dev liboath-dev libunistring0
     )
     apt-get update -y && apt-get upgrade -y
     for depend in ${apt_depends[@]}; do
