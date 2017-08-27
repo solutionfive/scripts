@@ -51,8 +51,8 @@ install_kernel4.12() {
 
 add_new_user() {
     useradd rick
-    mkdir /home/rick/.ssh
-    echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCj3sFcfqI0ybPHSsdyFbV7+yKmWr562meCPqbisIUGy8qYDkrtjZ6e+uREAyww824HLTMhAp6qMzqekUqVelgUgtTJa/PH59ggsXVDuF3/h8pYvNMCtOo+RCHFcXLmvXUKmuUJ1xJx6qaFDH5IGA3uJakoyXQgZNCU3o6aXCKuZ3E8zATrmOJ7MMd5pyJRYSfwd3VdCL3p4MTf4zWXcJZc00i+SC34ME04qG8owqIoJ//UkMJZs7eHamV3gi+TwqU0pWH4kTNVrljncANcSnWKbsAcIkHPy4BfglzQJGJZQSeENQU5xD+MgPvxSBARhLvUsNwlz5wBpGLCk6yd2R8H xhxu@xhxu-mac" >> /home/rick/.ssh/authorized_keys
+    mkdir /home/rick/.ssh -p
+    echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCj3sFcfqI0ybPHSsdyFbV7+yKmWr562meCPqbisIUGy8qYDkrtjZ6e+uREAyww824HLTMhAp6qMzqekUqVelgUgtTJa/PH59ggsXVDuF3/h8pYvNMCtOo+RCHFcXLmvXUKmuUJ1xJx6qaFDH5IGA3uJakoyXQgZNCU3o6aXCKuZ3E8zATrmOJ7MMd5pyJRYSfwd3VdCL3p4MTf4zWXcJZc00i+SC34ME04qG8owqIoJ//UkMJZs7eHamV3gi+TwqU0pWH4kTNVrljncANcSnWKbsAcIkHPy4BfglzQJGJZQSeENQU5xD+MgPvxSBARhLvUsNwlz5wBpGLCk6yd2R8H" >> /home/rick/.ssh/authorized_keys
     chmod 755 /home/rick/.ssh
     chown rick:rick /home/rick/.ssh
     chmod 600 /home/rick/.ssh/authorized_keys
