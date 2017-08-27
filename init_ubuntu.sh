@@ -29,7 +29,7 @@ error_detect_depends() {
 
 install_dependencies() {
     apt_depends=(
-    build-essential make gcc-4.9
+    build-essential make gcc-4.9 g++-4.9
     )
     apt-get update -y && apt-get upgrade -y
     for depend in ${apt_depends[@]}; do

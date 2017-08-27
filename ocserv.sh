@@ -812,7 +812,7 @@ ask_ocserv
 ins_ocserv
 login_ocserv
 ins_dnsmasq
-ins_serverSpeeder
+#ins_serverSpeeder
 SYSCONF
 ins_Finish
 }
