@@ -815,6 +815,7 @@ ins_dnsmasq
 #ins_serverSpeeder
 SYSCONF
 ins_Finish
+systemctl enable ocserv
 }
 
 function ins_Finish()

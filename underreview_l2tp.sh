@@ -686,6 +686,7 @@ l2tp(){
     preinstall_l2tp
     install_l2tp
     finally
+    systemctl enable ipsec
 }
 
 list_users(){
