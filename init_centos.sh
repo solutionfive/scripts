@@ -89,6 +89,7 @@ main() {
     install_dependencies
     yum -y update
     disable_root_ssh
+    add_new_user
     echo "Installation have completed, please login your server with (ssh USERNAME@IPADDRESS)"
 }
 
