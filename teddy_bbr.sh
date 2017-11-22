@@ -182,12 +182,6 @@ reboot_os() {
     fi
 }
 
-verify() {
-KERNEL_VER=$(uname -r | awk -F'.' '{print $1}')
-SYSCTL_CONGESTION_RET=$(sysctl net.ipv4.tcp_congestion_control | awk -F'=' '{print $2}')
-SYSCTL_QDISC_RET=$(sysctl net.core.default_qdisc | awk -F'=' '{print $2}')
-
-}
 
 install_bbr() {
     check_bbr_status
@@ -231,16 +225,6 @@ install_bbr() {
     install_config
     sysctl_config
     reboot_os
-    action=$1
-[ -z $1 ] && action=verify
-case "$action" in
-	verify)
-	;;
-	*)
-	echo "Error !"
-	echo "Usage: { verify }"
-	;;
-esac
 }
 
 
