@@ -20,9 +20,7 @@ detect_depends(){
 }
 
 install_dependencies(){
-	yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-	yum-config-manager --enable docker-ce-edge
-	yum_depends=(yum-utils device-mapper-persistent-data lvm2 docker-ce)
+	yum_depends=(yum-utils device-mapper-persistent-data lvm2)
 	for depend in ${yum_depends[@]}; do
 		detect_depends "yum -y install ${depend}"
 	done
@@ -38,6 +36,9 @@ remove_dependencies(){
 main(){
     remove_dependencies
     install_dependencies
+	yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+	yum-config-manager --enable docker-ce-edge
+	yum -y install docker-ce
     systemctl start docker
     systemctl enable docker
 }
