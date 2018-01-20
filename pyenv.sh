@@ -18,9 +18,9 @@ git clone https://github.com/yyuu/pyenv-virtualenv.git $UID_PATH/.pyenv/plugins/
 configuring_pyenv() {
 echo 'export PYENV_ROOT="$HOME/.pyenv"' >> $UID_PATH/.bashrc
 echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> $UID_PATH/.bashrc
-exec $SHELL
 echo 'eval "$(pyenv init -)"' >> $UID_PATH/.bashrc
 echo 'eval "$(pyenv virtualenv-init -)"' >> $UID_PATH/.bashrc
+exec $SHELL
 }
 
 error_detect_depends(){
