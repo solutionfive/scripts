@@ -19,6 +19,7 @@ disable_firewall() {
     iptables -F
     systemctl stop iptables
     systemctl disable iptables
+    systemctl disable firewalld
     echo -e"${green}Info:${plain} iptables have been disabled."
 }
 
