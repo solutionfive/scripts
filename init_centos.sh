@@ -88,7 +88,7 @@ main() {
     disable_selinux
     disable_firewall
     install_dependencies
-    yum -y update
+    yum -y update && echo 'net.ipv4.ip_forward = 1' >> /etc/sysctl.conf && sysctl -p
     disable_root_ssh
     add_new_user
     echo "Installation have completed, please login your server with (ssh USERNAME@IPADDRESS)"

@@ -224,7 +224,8 @@ install_bbr() {
 
     install_config
     sysctl_config
-    reboot_os
+    #reboot_os
+    init 6
 }
 
 
